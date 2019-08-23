@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 
 //Conectar BD
 // var urlBD = 'mongodb://localhost/prueba'; URL Local
-var urlBD = process.env.DB_CONNECTION;
+var urlBD = 'mongodb+srv://prueba:prueba123@test-4bwhc.mongodb.net/test?retryWrites=true&w=majority';
 //Opciones conexion
 var opts = { useNewUrlParser: true, connectTimeoutMS: 20000 };
 //Pruebo conexion
