@@ -10,4 +10,5 @@ Link de heroku
 
 Para pushear a heroku en el bash de git
 > heroku git:remote -a stormy-wildwood-43671
+
 > git push heroku master
