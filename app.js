@@ -13,9 +13,11 @@ app.use(cors());
 
 const postRoutes = require("./routes/posts");
 const emailRoutes = require("./routes/email");
+const userRoutes = require("./routes/users");
 
 app.use("/posts", postRoutes);
 app.use("/email", emailRoutes);
+app.use("/users", userRoutes);
 
 //Rutas
 app.get("/", (req, res) => {
