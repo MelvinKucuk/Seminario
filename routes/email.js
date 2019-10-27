@@ -3,12 +3,14 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const hbs = require("nodemailer-express-handlebars");
+const Denuncia = require("../models/Denuncia");
 
 router.post("/", (req, res) => {
   try {
     console.log(req.body);
     console.log(req.body.email);
-    sendEmail(req.body);
+    sendEmail(req.body.asegurado);
+    saveDenuncia(req.body);
 
     res.email;
   } catch (error) {
@@ -65,5 +67,27 @@ function sendEmail(body) {
     }
   });
 }
+
+async function saveDenuncia(denuncia){
+  const denunciaL = new Denuncia({
+    direccion: denuncia.direccion,
+    fecha: denuncia.fecha,
+    hora: denuncia.hora,
+    asegurado: denuncia.asegurado,
+    tercero: denuncia.tercero,
+    imagePathPoliza: denuncia.imagePathPoliza,
+    imagePathCedula: denuncia.imagePathCedula,
+    imagePathsLicencia: denuncia.imagePathsLicencia,
+    imagePathsChoque: denuncia.imagePathsChoque,
+  });
+  try {
+      const savedDenuncia = await denunciaL.save();
+      res.json(savedDenuncia);
+      console.log(saveDenuncia);
+  } catch (err) {
+      res.json({ message: err });
+      console.log(err);
+  }
+};
 
 module.exports = router;
