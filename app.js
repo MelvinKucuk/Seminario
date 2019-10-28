@@ -19,7 +19,7 @@ const denunciaRoutes = require("./routes/denuncia");
 app.use("/posts", postRoutes);
 app.use("/email", emailRoutes);
 app.use("/users", userRoutes);
-//app.use("/denunica", denunciaRoutes);
+app.use("/denuncia", denunciaRoutes);
 
 //Rutas
 app.get("/", (req, res) => {
