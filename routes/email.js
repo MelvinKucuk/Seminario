@@ -7,14 +7,11 @@ const Denuncia = require("../models/Denuncia");
 
 router.post("/", (req, res) => {
   try {
-    console.log(req.body);
-    console.log(req.body.email);
     sendEmail(req.body.asegurado);
     saveDenuncia(req.body);
 
     res.email;
   } catch (error) {
-    console.log(error);
     res.json({ message: error });
   }
 });
@@ -61,16 +58,16 @@ function sendEmail(body) {
   transporter.sendMail(mailOptions, function(err, data) {
     if (err) {
       console.log("Error");
-      console.log(err);
     } else {
       console.log("Se envio");
     }
   });
 }
 
-async function saveDenuncia(denuncia){
+async function saveDenuncia(denuncia) {
   const denunciaL = new Denuncia({
-    direccion: denuncia.direccion,
+    calle: denuncia.calle,
+    altura: denuncia.altura,
     fecha: denuncia.fecha,
     hora: denuncia.hora,
     asegurado: denuncia.asegurado,
@@ -79,15 +76,19 @@ async function saveDenuncia(denuncia){
     imagePathCedula: denuncia.imagePathCedula,
     imagePathsLicencia: denuncia.imagePathsLicencia,
     imagePathsChoque: denuncia.imagePathsChoque,
+    imagePathsExtras: denuncia.imagePathsExtras,
+    datos: denuncia.datos,
+    esEsquina: denuncia.esEsquina,
+    esDobleMano: denuncia.esDobleMano
   });
   try {
-      const savedDenuncia = await denunciaL.save();
-      res.json(savedDenuncia);
-      console.log(saveDenuncia);
+    const savedDenuncia = await denunciaL.save();
+    res.json(savedDenuncia);
+    console.log(saveDenuncia);
   } catch (err) {
-      res.json({ message: err });
-      console.log(err);
+    res.json({ message: err });
+    console.log(err);
   }
-};
+}
 
 module.exports = router;

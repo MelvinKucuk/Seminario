@@ -10,6 +10,12 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  nombre: String,
+  apellido: String,
+  dni: String,
+  fechaNacimiento: String,
+  pais: String,
+  domicilio: String,
   date: {
     type: Date,
     default: Date.now
