@@ -29,14 +29,30 @@ router.get("/byId/:id", async (req, res) => {
   }
 });
 
-// Ejemplo actualizar un post
+// Actualizar una denuncia
 router.patch("/:denunciaId", async (req, res) => {
   try {
-    const updatedPost = await Post.updateOne(
-      { _id: req.params.postId },
-      { $set: { title: req.body.title } }
+    const denuncia = req.body;
+    const updatedDenuncia = await Denuncia.updateOne(
+      { _id: req.params.denunciaId },
+      { $set: { 
+        calle: denuncia.calle,
+        altura: denuncia.altura,
+        fecha: denuncia.fecha,
+        hora: denuncia.hora,
+        asegurado: denuncia.asegurado,
+        tercero: denuncia.tercero,
+        imagePathPoliza: denuncia.imagePathPoliza,
+        imagePathCedula: denuncia.imagePathCedula,
+        imagePathsLicencia: denuncia.imagePathsLicencia,
+        imagePathsChoque: denuncia.imagePathsChoque,
+        imagePathsExtras: denuncia.imagePathsExtras,
+        datos: denuncia.datos,
+        esEsquina: denuncia.esEsquina,
+        esDobleMano: denuncia.esDobleMano
+       } }
     );
-    res.json(updatedPost);
+    res.json(updatedDenuncia);
   } catch (error) {
     res.json({ message: error });
   }
