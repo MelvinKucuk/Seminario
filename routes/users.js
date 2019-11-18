@@ -44,16 +44,16 @@ router.patch("/", async (req, res) => {
   try {
     const updatedUser = await User.updateOne(
       { username: req.body.username },
-      { $set: { 
-        username: req.body.username,
-        password: req.body.password,
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-        dni: req.body.dni,
-        fechaNacimiento: req.body.fechaNacimiento,
-        pais: req.body.pais,
-        domicilio: req.body.domicilio
-       } }
+      {
+        $set: {
+          nombre: req.body.nombre,
+          apellido: req.body.apellido,
+          dni: req.body.dni,
+          fechaNacimiento: req.body.fechaNacimiento,
+          pais: req.body.pais,
+          domicilio: req.body.domicilio
+        }
+      }
     );
     res.json(updatedUser);
   } catch (error) {
