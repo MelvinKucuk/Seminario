@@ -21,8 +21,8 @@ function sendEmail(body) {
     service: "gmail",
     auth: {
       user: "crashapp9@gmail.com",
-      pass: "Seminario1234"
-    }
+      pass: "Seminario1234",
+    },
   });
 
   const handlebarOptions = {
@@ -30,10 +30,10 @@ function sendEmail(body) {
       extName: ".handlebars",
       partialsDir: "some/path",
       layoutsDir: "./views/index",
-      defaultLayout: ""
+      defaultLayout: "",
     },
     viewPath: "./views/",
-    extName: ".handlebars"
+    extName: ".handlebars",
   };
 
   transporter.use("compile", hbs(handlebarOptions));
@@ -51,12 +51,13 @@ function sendEmail(body) {
       dni: body.dni,
       domicilio: body.domicilio,
       pais: body.pais,
-      detalle: body.detalle
-    }
+      detalle: body.detalle,
+    },
   };
 
-  transporter.sendMail(mailOptions, function(err, data) {
+  transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
+      console.log(err);
       console.log("Error");
     } else {
       console.log("Se envio");
@@ -79,7 +80,7 @@ async function saveDenuncia(denuncia) {
     imagePathsExtras: denuncia.imagePathsExtras,
     datos: denuncia.datos,
     esEsquina: denuncia.esEsquina,
-    esDobleMano: denuncia.esDobleMano
+    esDobleMano: denuncia.esDobleMano,
   });
   try {
     const savedDenuncia = await denunciaL.save();

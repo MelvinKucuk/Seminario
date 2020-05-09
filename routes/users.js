@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
       console.log(user[0]);
     } else {
       return res.status(400).send({
-        message: "This is an error!"
+        message: "This is an error!",
       });
     }
   } catch (error) {
@@ -23,18 +23,22 @@ router.post("/", async (req, res) => {
 router.post("/newUser", async (req, res) => {
   console.log(req.body);
   const user = new User({
+    username: req.body.username,
+    password: req.body.password,
     nombre: req.body.nombre,
     apellido: req.body.apellido,
     dni: req.body.dni,
     fechaNacimiento: req.body.fechaNacimiento,
     pais: req.body.pais,
-    domicilio: req.body.domicilio
+    domicilio: req.body.domicilio,
   });
   try {
     const savedUser = await user.save();
     res.json(savedUser);
+    console.log(res.json(savedUser));
   } catch (err) {
     res.json({ message: err });
+    console.log(err);
     return res.status(400).send();
   }
 });
@@ -51,8 +55,8 @@ router.patch("/", async (req, res) => {
           dni: req.body.dni,
           fechaNacimiento: req.body.fechaNacimiento,
           pais: req.body.pais,
-          domicilio: req.body.domicilio
-        }
+          domicilio: req.body.domicilio,
+        },
       }
     );
     res.json(updatedUser);
